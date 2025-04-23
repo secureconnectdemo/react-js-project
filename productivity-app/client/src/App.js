@@ -10,7 +10,7 @@ function App() {
   }, []);
 
   const fetchTasks = async () => {
-    const res = await fetch('http://localhost:5000/api/tasks');
+    const res = await fetch('https://productivity-api.onrender.com');
     const data = await res.json();
     setTasks(data);
   };
