@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 function App() {
+  const API_BASE = 'https://productivity-api.onrender.com/api/tasks';
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
@@ -10,14 +11,14 @@ function App() {
   }, []);
 
   const fetchTasks = async () => {
-    const res = await fetch('https://productivity-api.onrender.com');
+    const res = await fetch(API_BASE);
     const data = await res.json();
     setTasks(data);
   };
 
   const handleAddTask = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/api/tasks', {
+    const res = await fetch(API_BASE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, dueDate })
@@ -29,7 +30,7 @@ function App() {
   };
 
   const toggleComplete = async (id) => {
-    const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
+    const res = await fetch(`${API_BASE}/${id}`, {
       method: 'PUT'
     });
     const updated = await res.json();
@@ -37,7 +38,7 @@ function App() {
   };
 
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/api/tasks/${id}`, { method: 'DELETE' });
+    await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
     setTasks(tasks.filter(t => t.id !== id));
   };
 
