@@ -2,7 +2,6 @@
   "name": "productivity-server",
   "version": "1.0.0",
   "main": "server.js",
-// Just remove this line entirely or comment it out
   "scripts": {
     "start": "node server.js"
   },
